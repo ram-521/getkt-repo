@@ -1,0 +1,78 @@
+{% load static %} 
+<!DOCTYPE html>
+<!-- Coding by CodingLab | www.codinglabweb.com-->
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> Responsive Login and Signup Form </title>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="{% static 'app1/style.css' %}">
+                
+        <!-- Boxicons CSS -->
+        <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+                        
+    </head>
+    <body>
+        <section class="container forms">
+            <div class="form login">
+                <div class="form-content">
+                    <header>Signup</header>
+                    <form method="post">
+                        {% csrf_token %}
+                        {% if form.non_field_errors %}
+                        {% for error in form.non_field_errors %}
+                            <div class="field-error">
+                                    <p>{{error}}</p>
+                            </div>
+                        {% endfor %} 
+                        {% endif %} 
+                        <div class="field input-field">
+                            {{ob.username}}
+                        </div>
+                        {% if ob.username.errors %}
+                        <div class="field-error">
+                            <p>{{ob.username.errors.as_text}}</p>
+                        </div>
+                        {% endif %}
+                        <div class="field input-field">
+                            {{ob.email}}
+                        </div>
+                        {% if ob.email.errors %}
+                        <div class="field-error">
+                            <p>{{ob.email.errors.as_text}}</p>
+                        </div>
+                        {% endif %}
+                        <div class="field input-field">
+                            {{ob.password1}}
+                        </div>
+                        {% if ob.password1.errors %}
+                        <div class="field-error">
+                            <p>{{ob.password1.errors.as_text}}</p>
+                        </div>
+                        {% endif %}
+                        <div class="field input-field">
+                            {{ob.password2}}
+                            <i class='bx bx-hide eye-icon'></i>
+                        </div>
+                        {% if ob.password2.errors %}
+                        <div class="field-error">
+                            <p>{{ob.password2.errors.as_text}}</p>
+                        </div>
+                        {% endif %}
+
+                        <div class="field button-field">
+                            <button>Signup</button>
+                        </div>
+                    </form>
+
+                    <div class="form-link">
+                        <span>Already have an account? <a href="{% url 'login' %}" class="link signup-link">Login</a></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+    </html>
